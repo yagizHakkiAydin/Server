@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BattleOfMinds.Core.Entity;
 
 namespace BattleOfMinds.Models.Models
 {
-    public class QuestionType
+    public class QuestionType : IEntity
     {
         [Key]
         public int Id { get; set; }

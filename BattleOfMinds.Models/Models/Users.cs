@@ -1,15 +1,15 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BattleOfMinds.Core.Entity;
 
 namespace BattleOfMinds.Models.Models
 {
-    public class Users
+    public class Users : IEntity
     {
         [Key]
         public int Id { get; set; }

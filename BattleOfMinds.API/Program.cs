@@ -14,9 +14,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddScoped<IQuestionCategoriesBusiness, QuestionCategoriesBusiness>();
 builder.Services.AddScoped<IEntityRepository<QuestionCategories>, EntityRepository<QuestionCategories, BattleOfMindsDbContext>>();
+builder.Services.AddScoped<IEntityRepository<Questions>, EntityRepository<Questions, BattleOfMindsDbContext>>();
+builder.Services.AddScoped<IQuestionsBusiness, QuestionsBusiness>();
+builder.Services.AddScoped<IQuestionTypeBusiness, QuestionTypeBusiness>();
+builder.Services.AddScoped<IEntityRepository<QuestionType>, EntityRepository<QuestionType, BattleOfMindsDbContext>>();
+builder.Services.AddScoped<IUsersBusiness, UsersBusiness>();
+builder.Services.AddScoped<IEntityRepository<Users>, EntityRepository<Users, BattleOfMindsDbContext>>();
 
 var app = builder.Build();
 

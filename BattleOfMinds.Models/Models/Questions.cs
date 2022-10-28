@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using BattleOfMinds.Core.Entity;
 
 namespace BattleOfMinds.Models.Models
 {
-    public class Questions
+    public class Questions : IEntity
     {
 
         [Key]

@@ -1,12 +1,10 @@
-﻿using BattleOfMinds.Models.Models;
+﻿using BattleOfMinds.Core.DataAccess;
+using BattleOfMinds.Models.Models;
 
 namespace BattleOfMinds.API.Business.Abstract
 {
-    public interface IQuestionsBusiness
+    public interface IQuestionsBusiness : IEntityRepository<Questions>
     {
-        public IEnumerable<Questions> Get(int id);
-
-        public IEnumerable<Questions> GetAll();
 
     }
 }
