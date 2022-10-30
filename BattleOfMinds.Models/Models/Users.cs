@@ -26,6 +26,12 @@ namespace BattleOfMinds.Models.Models
         [StringLength(10)]
         public string UserType { get; set; }
 
+        [DefaultValue(0)]
+        public int Score { get; set; }
+
+        [DefaultValue(0)]
+
+        public int Championship { get; set; }
 
         [DefaultValue(false)]
         public bool isDeleted { get; set; }

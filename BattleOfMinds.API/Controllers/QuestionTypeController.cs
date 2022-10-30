@@ -1,4 +1,5 @@
 ﻿using BattleOfMinds.API.Business;
+using BattleOfMinds.API.Business.Abstract;
 using BattleOfMinds.Models.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +11,46 @@ namespace BattleOfMinds.API.Controllers
     public class QuestionTypeController : ControllerBase
     {
 
-        QuestionTypeBusiness business = new QuestionTypeBusiness();
+        private readonly IQuestionTypeBusiness _questionTypeBusiness;
+
+        public QuestionTypeController(IQuestionTypeBusiness questionTypeBusiness)
+        {
+            _questionTypeBusiness = questionTypeBusiness;
+        }
+
 
         [HttpGet("{id}")]
-        public IEnumerable<QuestionType> Get(int id)
+        public async Task<QuestionType> Get(int id)
         {
-            return business.Get(id);
+            return await _questionTypeBusiness.Get(o => o.Id.Equals(id) && o.isDeleted.Equals(false));
         }
 
         [HttpGet]
 
-        public IEnumerable<QuestionType> GetAll()
+        public async Task<IEnumerable<QuestionType>> GetAll()
         {
-            return business.GetAll();
+            return await _questionTypeBusiness.GetAll(o => o.isDeleted.Equals(false));
+        }
+
+        [HttpPost]
+        public async Task<QuestionType> Add(QuestionType questionType)
+        {
+            return await _questionTypeBusiness.Add(questionType);
+        }
+
+        [HttpDelete]
+        public async Task<QuestionType> Delete(int id)
+        {
+            var result = await _questionTypeBusiness.Get(o => o.Id.Equals(id) && o.isDeleted.Equals(false));
+            result.isDeleted = true;
+            return await _questionTypeBusiness.Update(result);
+        }
+
+        [HttpPut]
+        public async Task<QuestionType> Update(QuestionType questionType)
+        {
+
+            return await _questionTypeBusiness.Update(questionType);
         }
 
     }
