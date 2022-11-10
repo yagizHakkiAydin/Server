@@ -26,16 +26,9 @@ namespace BattleOfMinds.API.Controllers
         }
 
         [HttpGet]
-
         public async Task<IEnumerable<Users>> GetAll()
         {
             return await _usersBusiness.GetAll(o => o.isDeleted.Equals(false));
-        }
-
-        [HttpPost]
-        public async Task<Users> Add(Users users)
-        {
-            return await _usersBusiness.Add(users);
         }
 
         [HttpDelete]
@@ -53,6 +46,40 @@ namespace BattleOfMinds.API.Controllers
             return await _usersBusiness.Update(users);
         }
 
+        [HttpPost]
+        [Route("Sign-up")]
+        public async Task<string> Register(Users users)
+        {
+            return await _usersBusiness.Register(users);
+        }
 
+        [HttpPost]
+        [Route("ApproveUser")]
+        public async Task<bool> ApproveUser(int userId, string code)
+        {
+
+            return await _usersBusiness.ApproveUser(userId, code);
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<bool> Login(string email, string password)
+        {
+            return await _usersBusiness.Login(email, password);
+        }
+
+        [HttpPost]
+        [Route("ForgetPassword")]
+        public async Task<bool> ForgetPassword(string email)
+        {
+            return await _usersBusiness.ForgetPassword(email);
+        }
+
+        [HttpPost]
+        [Route("UpdatePassword")]
+        public async Task<bool> UpdatePassword(int userId, string oldPassword, string newPassword)
+        {
+            return await _usersBusiness.UpdatePassword(userId, oldPassword, newPassword);
+        }
     }
 }

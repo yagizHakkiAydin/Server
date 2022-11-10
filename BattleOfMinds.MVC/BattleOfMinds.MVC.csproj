@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BattleOfMinds.Models\BattleOfMinds.Models.csproj" />
+  </ItemGroup>
+
 </Project>

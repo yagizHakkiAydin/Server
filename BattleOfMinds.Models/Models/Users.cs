@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,11 @@ namespace BattleOfMinds.Models.Models
         public string Email { get; set; }
 
         [Required]
+        [StringLength(100)]
+        public string UserName { get; set; }
+
+
+        [Required]
         [StringLength(50)]
         public string Password { get; set; }
 
@@ -35,6 +41,11 @@ namespace BattleOfMinds.Models.Models
 
         [DefaultValue(false)]
         public bool isDeleted { get; set; }
+
+        [DefaultValue(false)]
+        public bool isApproved { get; set; }
+
+        public string ApprovedCode { get; set; }
 
     }
 }
