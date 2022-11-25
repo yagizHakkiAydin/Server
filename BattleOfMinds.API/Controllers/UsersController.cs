@@ -61,7 +61,7 @@ namespace BattleOfMinds.API.Controllers
             return await _usersBusiness.ApproveUser(userId, code);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("Login")]
         public async Task<bool> Login(string email, string password)
         {

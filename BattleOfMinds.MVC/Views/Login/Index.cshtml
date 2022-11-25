@@ -30,5 +30,16 @@
 
 
     </header>
+        <button onclick="deneme()">
+        Bas
+    </button>
 </body>
 </html>
+<script>
+    function deneme()
+    {
+        $.get("Login/deneme", function (data) {
+            alert("Load was performed.");
+        });
+    }
+</script>

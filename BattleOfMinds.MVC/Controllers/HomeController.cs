@@ -1,4 +1,5 @@
 ﻿using BattleOfMinds.Models.Models;
+using BattleOfMinds.MVC.Communication;
 using BattleOfMinds.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,10 +9,11 @@ namespace BattleOfMinds.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public IServiceCommunication _serviceCommuniction;
+        public HomeController(ILogger<HomeController> logger, IServiceCommunication serviceCommuniction)
         {
             _logger = logger;
+            _serviceCommuniction = serviceCommuniction;
         }
 
         public IActionResult Index()
@@ -20,28 +22,10 @@ namespace BattleOfMinds.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> Login(string username, string password)
+        public async Task<bool> Login(string email, string password)
         {
-
-            Users user = new Users();
-            user.Email = username;
-            user.Password = password;
-
-
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:7157/api/Users/Login");
-
-                //HTTP POST
-                var postTask = client.PostAsJsonAsync<Users>("Users/Login", user);
-
-                var result = postTask.Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-            }
+            
+            var result = _serviceCommuniction.GetResponse("api/Users/Login?email="+email+"&password="+password).Result;
             return true;
         }
 

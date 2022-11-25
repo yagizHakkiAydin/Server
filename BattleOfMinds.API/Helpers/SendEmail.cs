@@ -23,7 +23,7 @@ namespace BattleOfMinds.API.Helpers
                 eMail.Body = body;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.EnableSsl = true;
-                smtp.Credentials = new System.Net.NetworkCredential("battleofmindsgame@gmail.com", "nvephvzffetchfge");
+                smtp.Credentials = new System.Net.NetworkCredential("battleofmindsgame@gmail.com", "yabdextzocthrlsn");
                 await smtp.SendMailAsync(eMail);
                 eMail.Dispose();
                 smtp.Dispose();
@@ -50,7 +50,7 @@ namespace BattleOfMinds.API.Helpers
                 eMail.Body = body;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.EnableSsl = true;
-                smtp.Credentials = new System.Net.NetworkCredential("battleofmindsgame@gmail.com", "nvephvzffetchfge");
+                smtp.Credentials = new System.Net.NetworkCredential("battleofmindsgame@gmail.com", "yabdextzocthrlsn");
                 await smtp.SendMailAsync(eMail);
                 eMail.Dispose();
                 smtp.Dispose();
