@@ -25,7 +25,7 @@ namespace BattleOfMinds.API.Controllers
         }
 
         [HttpGet]
-
+        [Route("GetAllQuestions")]
         public async Task<IEnumerable<Questions>> GetAll()
         {
             return await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false));

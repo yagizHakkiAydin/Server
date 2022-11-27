@@ -68,7 +68,16 @@ namespace BattleOfMinds.API.Controllers
             return await _usersBusiness.Login(email, password);
         }
 
-        [HttpPost]
+
+        [HttpGet]
+        [Route("AdminLogin")]
+        public async Task<bool> AdminLogin(string email, string password)
+        {
+            return await _usersBusiness.AdminLogin(email, password);
+        }
+
+
+        [HttpGet]
         [Route("ForgetPassword")]
         public async Task<bool> ForgetPassword(string email)
         {

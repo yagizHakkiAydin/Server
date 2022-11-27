@@ -29,9 +29,12 @@ namespace BattleOfMinds.API.Business
             return _entityRepository.Get(filter);
         }
 
-        public Task<List<Questions>> GetAll(Expression<Func<Questions, bool>> filter = null)
+        public async Task<List<Questions>> GetAll(Expression<Func<Questions, bool>> filter = null)
         {
-            return _entityRepository.GetAll(filter);
+            List<Questions> questions = new List<Questions>();
+
+            return await _entityRepository.GetAll(filter);
+
         }
 
         public Task<Questions> Update(Questions Entity)

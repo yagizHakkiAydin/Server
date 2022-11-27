@@ -1,18 +1,6 @@
-html {
-  font-size: 14px;
+﻿.field-validation-error {
+    color: darkorange;
 }
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
+.input-validation-error{
+    border:1px solid darkorange;
 }

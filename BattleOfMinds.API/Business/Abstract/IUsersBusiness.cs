@@ -11,6 +11,8 @@ namespace BattleOfMinds.API.Business.Abstract
 
         public Task<bool> Login(string email, string password);
 
+        public Task<bool> AdminLogin(string email, string password);  
+
         public Task<bool> ForgetPassword(string email);
 
         public Task<bool> UpdatePassword(int userId, string oldPassword, string newPassword);

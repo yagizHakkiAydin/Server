@@ -93,7 +93,15 @@ namespace BattleOfMinds.API.Business
 
         }
 
+        public async Task<bool> AdminLogin(string email, string password)
+        {
+            var result = _entityRepository.Get(o => o.Email.Equals(email) && o.Password.Equals(Crypt.base64Encode(password)) && o.UserType == "Admin" && !o.isDeleted && o.isApproved).Result;
 
+            if (result == null) return false;
+
+            else return true;
+
+        }
         public async Task<bool> ForgetPassword(string email)
         {
             var user = _entityRepository.Get(o => o.Email.Equals(email) && !o.isDeleted && o.isApproved).Result;

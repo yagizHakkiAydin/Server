@@ -13,6 +13,12 @@ namespace BattleOfMinds.Models.Models
     public class Questions : IEntity
     {
 
+        public Questions()
+        {
+            QuestionType = new HashSet<QuestionType>();
+            QuestionCategories = new HashSet<QuestionCategories>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -55,8 +61,9 @@ namespace BattleOfMinds.Models.Models
         [DefaultValue(false)]
         public bool isDeleted { get; set; }
 
-        public QuestionType QuestionType { get; set; }
-        public QuestionCategories QuestionCategories { get; set; }
+        public virtual ICollection<QuestionType> QuestionType { get; set; }
+        public virtual ICollection<QuestionCategories> QuestionCategories { get; set; }
+
 
     }
 }

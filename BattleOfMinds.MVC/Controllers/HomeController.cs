@@ -16,20 +16,13 @@ namespace BattleOfMinds.MVC.Controllers
             _serviceCommuniction = serviceCommuniction;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<Questions> questions = new List<Questions>();
+            questions = await _serviceCommuniction.GetResponseList<Questions>("api/Questions/GetAllQuestions");
+            return View(questions);
+
         }
-
-        [HttpPost]
-        public async Task<bool> Login(string email, string password)
-        {
-            
-            var result = _serviceCommuniction.GetResponse("api/Users/Login?email="+email+"&password="+password).Result;
-            return true;
-        }
-
-
         public IActionResult Privacy()
         {
             return View();

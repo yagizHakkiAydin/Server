@@ -1,0 +1,120 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url(/images/pexels-krivec-ales-547114.jpg);
+    background-size: cover;
+}
+
+.multiple{
+    width: 500px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    background:rgba(0, 0, 0, 0.3);
+    border:3px solid black;
+    border-radius: 12px;
+    padding: 40px;
+}
+
+.question{
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+#question-label{
+    display: block;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: aliceblue;
+
+}
+#qarea{
+   
+    font-size: 18px;
+   
+    resize:none;
+
+    background: transparent;
+    
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.answer-label{
+    margin-bottom: 12px;
+    color: aliceblue;
+}
+
+.answer-inp{
+    width: 75%;
+    height: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15px;
+    background:transparent;
+    border: 3px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+
+}
+
+.icons{
+    
+    width: 50%;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+    position:relative;
+    
+    
+}
+
+#icon1{
+    margin: 30px;
+    color: #ff22bb;
+    
+    
+}
+
+
+#icon2{
+    margin: 30px;
+    color: #69EBFD;
+   
+}
+
+#question-category{
+    background:transparent;
+    border: none;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+#label-category{
+    color: white;
+    font-size: 16px;
+}
+
+.category{
+    margin-bottom: 20px;
+}
+
+.true-answer-inp{
+    width: 50%;
+    height: 15px;
+    
+    
+    font-size: 15px;
+    background:transparent;
+    border: 3px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px ;
+
+}

@@ -31,7 +31,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Competitions");
+                    b.ToTable("Competitions", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.CompetitionUsers", b =>
@@ -44,7 +44,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompetitionUsers");
+                    b.ToTable("CompetitionUsers", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.QuestionCategories", b =>
@@ -65,7 +65,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionCategories");
+                    b.ToTable("QuestionCategories", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.Questions", b =>
@@ -132,7 +132,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasIndex("QuestionTypeId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.QuestionType", b =>
@@ -153,7 +153,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuestionType");
+                    b.ToTable("QuestionType", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.Users", b =>
@@ -202,7 +202,7 @@ namespace BattleOfMinds.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BattleOfMinds.Models.Models.Questions", b =>

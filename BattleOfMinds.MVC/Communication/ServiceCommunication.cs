@@ -27,7 +27,7 @@ namespace BattleOfMinds.MVC.Communication
             //JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
         }
 
-        public async Task<HttpResponseMessage> GetResponse(string weburl)
+        public async Task<string> GetResponse(string weburl)
         {
             Uri url = new Uri("https://localhost:7157/");
             using HttpClient client = new HttpClient();
@@ -35,8 +35,8 @@ namespace BattleOfMinds.MVC.Communication
             using HttpRequestMessage request = new(HttpMethod.Get, weburl);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var json = await client.GetStringAsync(request.RequestUri);
-            using HttpResponseMessage result = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            return result;
+            //using HttpResponseMessage result = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            return json;
         }
 
         public async Task<T> GetResponseWithoutToken<T>(string weburl) where T : class
@@ -59,7 +59,10 @@ namespace BattleOfMinds.MVC.Communication
             Uri url = new Uri("https://localhost:7157/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
-            var response = await client.GetAsync(weburl);
+            using HttpRequestMessage request = new(HttpMethod.Get, weburl);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //var json = await client.GetFromJsonAsync<T>(request.RequestUri);
+            var response = await client.GetAsync(request.RequestUri);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var jsonresult = response.Content.ReadAsStringAsync().Result;
