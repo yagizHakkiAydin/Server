@@ -8,7 +8,7 @@
 
 body {
     font-family: 'Times New Roman', Times, serif;
-    background-image: url(/images/pexels-s-migaj-747964.jpg);
+    background-image: url(/images/SciFiBg003_Blue.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -16,7 +16,8 @@ body {
 .menu-bar{
     width: 100%;
     height: 85px;
-    background: rgba(28,57,61,0.9);
+    background: transparent;
+    border-bottom: 1.25px solid rgba(149, 149, 149, 0.25);
 }
 
 .logo{
@@ -56,8 +57,13 @@ body {
     border-radius: 4px;
     padding:5px 10px;
 }
+
 a:hover{
-    border: 1px solid white;
+    color: white !important;;  
+    font-weight: none;
+    text-decoration: none!important;
+    box-shadow:0 0 10px #69EBFD;
+    
     transition: .4s;
 }
 
