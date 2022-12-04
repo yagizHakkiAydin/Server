@@ -25,7 +25,7 @@ namespace BattleOfMinds.MVC.Controllers
         [HttpPost]
         public ActionResult SignIn(string email, string password)
         {
-
+            
             var result = _serviceCommuniction.GetResponse("api/Users/AdminLogin?email=" + email + "&password=" + password).Result;
             if(result == "true")
                 return Redirect("~/Home");

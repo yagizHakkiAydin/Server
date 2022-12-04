@@ -29,7 +29,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<string> GetResponse(string weburl)
         {
-            Uri url = new Uri("https://localhost:7157/");
+            Uri url = new Uri("http://20.223.182.23:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             using HttpRequestMessage request = new(HttpMethod.Get, weburl);
@@ -41,7 +41,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<T> GetResponseWithoutToken<T>(string weburl) where T : class
         {
-            Uri url = new Uri("https://localhost:7157/");
+            Uri url = new Uri("http://20.223.182.23:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             var response = await client.GetAsync(weburl);
@@ -56,7 +56,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<List<T>> GetResponseList<T>(string weburl)
         {
-            Uri url = new Uri("https://localhost:7157/");
+            Uri url = new Uri("http://20.223.182.23:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             using HttpRequestMessage request = new(HttpMethod.Get, weburl);
@@ -87,7 +87,7 @@ namespace BattleOfMinds.MVC.Communication
         private async Task<HttpResponseMessage> SendAsync<T>(string address, HttpMethod httpMethod, object data)
         {
 
-            Uri url = new Uri("https://localhost:7157/");
+            Uri url = new Uri("http://20.223.182.23:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             using HttpRequestMessage request = new(httpMethod, address);

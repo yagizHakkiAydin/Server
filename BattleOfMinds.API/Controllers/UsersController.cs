@@ -18,12 +18,7 @@ namespace BattleOfMinds.API.Controllers
             _usersBusiness = usersBusiness;
         }
 
-
-        [HttpGet("{id}")]
-        public async Task<Users> Get(int id)
-        {
-            return await _usersBusiness.Get(o => o.Id.Equals(id) && o.isDeleted.Equals(false));
-        }
+        
 
         [HttpGet]
         public async Task<IEnumerable<Users>> GetAll()
@@ -31,6 +26,8 @@ namespace BattleOfMinds.API.Controllers
             return await _usersBusiness.GetAll(o => o.isDeleted.Equals(false));
         }
 
+
+       
         [HttpDelete]
         public async Task<Users> Delete(int id)
         {
@@ -46,14 +43,22 @@ namespace BattleOfMinds.API.Controllers
             return await _usersBusiness.Update(users);
         }
 
+        [HttpGet]
+        [Route("Email")]
+        public async Task<Users> Get(string email)
+        {
+            return await _usersBusiness.Get(o => o.Email.Equals(email) && o.isDeleted.Equals(false));
+        }
+
+
         [HttpPost]
         [Route("Sign-up")]
-        public async Task<string> Register(Users users)
+        public async Task<string> Register([FromBody]Users users)
         {
             return await _usersBusiness.Register(users);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("ApproveUser")]
         public async Task<bool> ApproveUser(int userId, string code)
         {

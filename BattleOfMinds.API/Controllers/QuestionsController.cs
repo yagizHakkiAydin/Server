@@ -1,8 +1,10 @@
 ﻿using BattleOfMinds.API.Business;
 using BattleOfMinds.API.Business.Abstract;
 using BattleOfMinds.Models.Models;
+using BattleOfMinds.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 
 namespace BattleOfMinds.API.Controllers
 {
@@ -11,10 +13,13 @@ namespace BattleOfMinds.API.Controllers
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionsBusiness _questionsBusiness;
-
-        public QuestionsController(IQuestionsBusiness questionsBusiness)
+        private readonly IQuestionCategoriesBusiness _questionCategoryBusiness;
+        private readonly IQuestionTypeBusiness _questionTypeBusiness;
+        public QuestionsController(IQuestionsBusiness questionsBusiness, IQuestionCategoriesBusiness questionCategoryBusiness, IQuestionTypeBusiness questionTypeBusiness)
         {
             _questionsBusiness = questionsBusiness;
+            _questionCategoryBusiness = questionCategoryBusiness;
+            _questionTypeBusiness = questionTypeBusiness;
         }
 
 
@@ -28,8 +33,44 @@ namespace BattleOfMinds.API.Controllers
         [Route("GetAllQuestions")]
         public async Task<IEnumerable<Questions>> GetAll()
         {
-            return await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false));
+            var questions = await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false));
+
+            return questions;
+        
         }
+
+        [HttpGet]
+        [Route("GetQuestions")]
+        public async Task<IEnumerable<QuestionVM>> GetQuestions()
+        {
+            var result =new  List<QuestionVM>();
+
+            var questions = await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false));
+            var questionCategory = await _questionCategoryBusiness.GetAll(o => o.isDeleted.Equals(false));
+            var questionType = await _questionTypeBusiness.GetAll(o => o.isDeleted.Equals(false));
+
+
+            foreach (var q in questions)
+            {
+                var addresult = new QuestionVM();
+                addresult.QuestionId = q.Id;
+                addresult.QuestionCategoryName = questionCategory.Where(o => o.Id.Equals(q.QuestionCategoryId)).FirstOrDefault().QuestionCategoryName;
+                addresult.QuestionTypeName = questionType.Where(o => o.Id.Equals(q.QuestionTypeId)).FirstOrDefault().QuestionTypeName;
+                addresult.Description = q.QuestionDescription;
+                addresult.Answer = q.QuestionAnswer;
+                addresult.Option1 = q.Option1;
+                addresult.Option2 = q.Option2;
+                addresult.Option3 = q.Option3;
+                addresult.Option4 = q.Option4;
+
+                result.Add(addresult);
+            }
+
+
+            return result;
+
+        }
+
 
         [HttpPost]
         public async Task<Questions> Add(Questions questions)

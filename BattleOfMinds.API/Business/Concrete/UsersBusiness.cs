@@ -4,6 +4,7 @@ using BattleOfMinds.API.Helpers;
 using BattleOfMinds.Core.DataAccess;
 using BattleOfMinds.Models.Models;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BattleOfMinds.API.Business
 {
@@ -36,7 +37,7 @@ namespace BattleOfMinds.API.Business
             return _entityRepository.Update(Entity);
         }
 
-        public async Task<string> Register(Users users)
+        public async Task<string> Register([FromBody] Users users)
         {
             var result = _entityRepository.GetAll(o => o.Email.Equals(users.Email) && o.isDeleted == false).Result.FirstOrDefault();
             if (result == null)
@@ -78,8 +79,11 @@ namespace BattleOfMinds.API.Business
                 return true;
 
             }
-            else return false;
-                
+            else
+            {
+                user.isDeleted= true;
+                return false;
+            }    
         }
 
 

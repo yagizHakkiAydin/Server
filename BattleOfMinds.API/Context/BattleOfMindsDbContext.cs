@@ -8,7 +8,7 @@ namespace BattleOfMinds.API.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer(@"Server=ServerName;Database=BattleOfMindsDb;User Id=UserID;Password=Password;");
+            dbContextOptionsBuilder.UseSqlServer(@"Server=BattleOfMindsPc\SQLSERVER;Database=BattleOfMindsDb;User Id=sa;Password=Bom_123.!;Trust Server Certificate=True;");
         }
 
         public DbSet<Users> Users { get; set; }

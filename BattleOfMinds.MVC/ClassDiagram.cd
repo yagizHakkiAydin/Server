@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BattleOfMinds.MVC.Controllers.HomeController">
+    <Position X="8.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAQAAAAAAAAAAIAAAAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleOfMinds.MVC.Controllers.LoginController">
+    <Position X="11.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACiAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleOfMinds.MVC.Communication.ServiceCommunication">
+    <Position X="4.5" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAACAAAAAAAAACAAAAAgAEAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Communication\ServiceCommunication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="BattleOfMinds.MVC.Communication.IServiceCommunication">
+    <Position X="1.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAgAEAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Communication\IServiceCommunication.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
