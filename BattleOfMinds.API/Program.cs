@@ -14,6 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ICompetitionBusiness, CompetitionsBusiness>();
+builder.Services.AddScoped<IEntityRepository<Competitions>, EntityRepository<Competitions, BattleOfMindsDbContext>>();
 builder.Services.AddScoped<IQuestionCategoriesBusiness, QuestionCategoriesBusiness>();
 builder.Services.AddScoped<IEntityRepository<QuestionCategories>, EntityRepository<QuestionCategories, BattleOfMindsDbContext>>();
 builder.Services.AddScoped<IEntityRepository<Questions>, EntityRepository<Questions, BattleOfMindsDbContext>>();

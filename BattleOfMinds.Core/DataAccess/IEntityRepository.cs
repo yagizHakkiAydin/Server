@@ -10,8 +10,8 @@ namespace BattleOfMinds.Core.DataAccess
 {
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
-        public Task<T> Get(Expression<Func<T, bool>> filter = null);
-        public Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null);
+        public Task<T> Get(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
+        public Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
         public Task<T> Add(T Entity);
         public Task<T> Update(T Entity);
     }

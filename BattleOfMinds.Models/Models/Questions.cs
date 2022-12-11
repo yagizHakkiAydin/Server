@@ -8,23 +8,22 @@ using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using BattleOfMinds.Core.Entity;
 
+#region Default Convention
 namespace BattleOfMinds.Models.Models
 {
     public class Questions : IEntity
     {
 
-        public Questions()
-        {
-            QuestionType = new HashSet<QuestionType>();
-            QuestionCategories = new HashSet<QuestionCategories>();
-        }
-
         [Key]
         public int Id { get; set; }
 
-        public int QuestionTypeId { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string QuestionType { get; set; }
 
-        public int QuestionCategoryId { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string QuestionCategory { get; set; }
 
         [Required]
         [StringLength(500)]
@@ -50,20 +49,16 @@ namespace BattleOfMinds.Models.Models
         [StringLength(200)]
         public string Option4 { get; set; }
 
-        [AllowNull]
-        [StringLength(200)]
-        public string Option5 { get; set; }
-
-
         [DefaultValue(false)]
         public bool isApproved { get; set; }
 
         [DefaultValue(false)]
         public bool isDeleted { get; set; }
 
-        public virtual ICollection<QuestionType> QuestionType { get; set; }
-        public virtual ICollection<QuestionCategories> QuestionCategories { get; set; }
+        [DefaultValue(1)]
+        public int CompetitionsId { get; set; }
 
 
     }
 }
+#endregion

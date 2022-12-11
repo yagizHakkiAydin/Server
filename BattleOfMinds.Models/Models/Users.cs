@@ -3,11 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BattleOfMinds.Core.Entity;
 
+#region Default Convention
 namespace BattleOfMinds.Models.Models
 {
     public class Users : IEntity
@@ -36,7 +39,6 @@ namespace BattleOfMinds.Models.Models
         public int Score { get; set; }
 
         [DefaultValue(0)]
-
         public int Championship { get; set; }
 
         [DefaultValue(false)]
@@ -44,8 +46,12 @@ namespace BattleOfMinds.Models.Models
 
         [DefaultValue(false)]
         public bool isApproved { get; set; }
-
         public string ApprovedCode { get; set; }
+
+        [DefaultValue(1)]
+        public int CompetitionsId { get; set; }
+
 
     }
 }
+#endregion

@@ -24,14 +24,14 @@ namespace BattleOfMinds.API.Business
             else return null;
         }
 
-        public Task<QuestionType> Get(Expression<Func<QuestionType, bool>> filter = null)
+        public Task<QuestionType> Get(Expression<Func<QuestionType, bool>> filter = null, params Expression<Func<QuestionType, object>>[] includes)
         {
-            return _entityRepository.Get(filter);
+            return _entityRepository.Get(filter,includes);
         }
 
-        public Task<List<QuestionType>> GetAll(Expression<Func<QuestionType, bool>> filter = null)
+        public Task<List<QuestionType>> GetAll(Expression<Func<QuestionType, bool>> filter = null, params Expression<Func<QuestionType, object>>[] includes)
         {
-            return _entityRepository.GetAll(filter);
+            return _entityRepository.GetAll(filter,includes);
         }
 
         public Task<QuestionType> Update(QuestionType Entity)

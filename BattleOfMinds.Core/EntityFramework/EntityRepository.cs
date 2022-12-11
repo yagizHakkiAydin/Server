@@ -2,6 +2,7 @@
 using BattleOfMinds.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,19 +17,44 @@ namespace BattleOfMinds.Core.EntityFramework
        where TContext : DbContext, new()
     {
 
-        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
+
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
         {
             using (var context = new TContext())
             {
-                return context.Set<TEntity>().FirstOrDefault(filter);
+
+                IQueryable<TEntity> queryable = context.Set<TEntity>();
+
+                if (filter != null)
+                {
+                    queryable = queryable.Where(filter);
+                }
+
+                if (includes is { Length: > 0 })
+                {
+                    queryable = includes.Aggregate(queryable, (current, include) => current.Include(include));
+                }
+
+                return queryable.AsNoTracking().SingleOrDefault();
             }
         }
 
-        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
         {
             using (var context = new TContext())
             {
-                return filter == null ? context.Set<TEntity>().ToList() : context.Set<TEntity>().Where(filter).ToList();
+                IQueryable<TEntity> queryable = context.Set<TEntity>();
+                if (filter != null)
+                {
+                    queryable = queryable.Where(filter);
+                }
+
+                if (includes is { Length: > 0 })
+                {
+                    queryable = includes.Aggregate(queryable, (current, include) => current.Include(include));
+                }
+
+                return await queryable.AsNoTracking().ToListAsync();
             }
         }
 

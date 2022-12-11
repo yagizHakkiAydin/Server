@@ -38,7 +38,7 @@ namespace BattleOfMinds.API.Controllers
             return questions;
         
         }
-
+        /*
         [HttpGet]
         [Route("GetQuestions")]
         public async Task<IEnumerable<QuestionVM>> GetQuestions()
@@ -71,8 +71,9 @@ namespace BattleOfMinds.API.Controllers
 
         }
 
-
+        */
         [HttpPost]
+        [Route("Add")]
         public async Task<Questions> Add(Questions questions)
         {
             return await _questionsBusiness.Add(questions);
