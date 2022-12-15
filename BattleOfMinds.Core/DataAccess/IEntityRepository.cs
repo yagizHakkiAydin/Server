@@ -14,5 +14,6 @@ namespace BattleOfMinds.Core.DataAccess
         public Task<List<T>> GetAll(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
         public Task<T> Add(T Entity);
         public Task<T> Update(T Entity);
+        public Task<T> Remove(T Entity);
     }
 }

@@ -34,6 +34,9 @@ namespace BattleOfMinds.API.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<int>("currentCapacity")
+                        .HasColumnType("int");
+
                     b.Property<bool>("isStarted")
                         .HasColumnType("bit");
 

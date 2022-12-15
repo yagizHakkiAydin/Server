@@ -1,6 +1,7 @@
 ﻿using BattleOfMinds.Core.DataAccess;
 using BattleOfMinds.Core.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,5 +78,18 @@ namespace BattleOfMinds.Core.EntityFramework
                 return updated.Entity;
             }
         }
+
+        public async Task<TEntity> Remove(TEntity Entity)
+        {
+            using (var context = new TContext())
+            {
+                var deleted = context.Remove(Entity);
+                context.SaveChanges();
+                return deleted.Entity;
+
+            }
+
+        }
+
     }
 }

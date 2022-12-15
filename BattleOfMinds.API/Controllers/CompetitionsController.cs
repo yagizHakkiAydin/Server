@@ -65,5 +65,67 @@ namespace BattleOfMinds.API.Controllers
         }
 
 
+
+        [HttpGet]
+        [Route("getQuestion")]
+        public async Task<Questions> getQuestion(int competitionId)
+        {
+
+            return await _competitionsBusiness.getQuestion(competitionId);
+        
+        }
+
+
+
+        [HttpGet]
+        [Route("decreaseCapacity")]
+        public async Task<int> decreaseCapacity(int competitionId)
+        {
+
+            return await _competitionsBusiness.decreaseCapacity(competitionId);
+        
+        }
+
+
+        [HttpPost]
+        [Route("wrongAnswer")]
+        public async Task<bool> wrongAnswer([FromBody] Users user)
+        { 
+        
+            return await _competitionsBusiness.wrongAnswer(user);
+        
+        }
+
+
+        [HttpPost]
+        [Route("trueAnswer")]
+        public async Task<bool> trueAnswer([FromBody] Users user)
+        { 
+        
+            return await _competitionsBusiness.trueAnswer(user);
+        
+        }
+
+        [HttpGet]
+        [Route("getCurrentCapacity")]
+        public async Task<int> getCurrentCapacity(int competitionId)
+        {
+
+            return await _competitionsBusiness.getCurrentCapacity(competitionId);
+
+        }
+
+
+
+        [HttpGet]
+        [Route("deleteCompetition")]
+        public async Task<bool> deleteCompetition(int competitionId)
+        { 
+        
+           return await _competitionsBusiness.deleteCompetition(competitionId);
+        
+        }
+
+
     }
 }

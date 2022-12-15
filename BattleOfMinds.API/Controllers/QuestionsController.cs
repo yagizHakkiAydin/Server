@@ -94,6 +94,27 @@ namespace BattleOfMinds.API.Controllers
             return await _questionsBusiness.Update(questions);
         }
 
+        [HttpGet]
+        [Route("ApproveQuestion")]
+        public async Task<Questions> ApproveQuestion(int questionId)
+        {
+
+            var result = await _questionsBusiness.Get(o => o.Id.Equals(questionId) && o.isDeleted.Equals(false));
+            result.isApproved = true;
+            return await _questionsBusiness.Update(result);
+
+        }
+
+
+        [HttpGet]
+        [Route("RejectQuestion")]
+        public async Task<Questions> RejectQuestion(int questionId)
+        {
+
+            var result = await _questionsBusiness.Get(o => o.Id.Equals(questionId));
+            return await _questionsBusiness.Remove(result);
+        
+        }
 
     }
 }

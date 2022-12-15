@@ -10,5 +10,6 @@ namespace BattleOfMinds.API.Business.Abstract
         public Task<Questions> Get(Expression<Func<Questions, bool>> filter = null, params Expression<Func<Questions, object>>[] includes);
         public Task<List<Questions>> GetAll(Expression<Func<Questions, bool>> filter = null, params Expression<Func<Questions, object>>[] includes);
         public Task<Questions> Update(Questions Entity);
+        public Task<Questions> Remove(Questions Entity);
     }
 }

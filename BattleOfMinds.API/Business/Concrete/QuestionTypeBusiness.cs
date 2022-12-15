@@ -39,5 +39,12 @@ namespace BattleOfMinds.API.Business
             return _entityRepository.Update(Entity);
         }
 
+        public Task<QuestionType> Remove(QuestionType Entity)
+        {
+
+            return _entityRepository.Remove(Entity);
+
+        }
+
     }
 }

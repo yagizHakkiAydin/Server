@@ -27,6 +27,9 @@ namespace BattleOfMinds.Models.Models
         [DefaultValue(false)]
         public bool isStarted { get; set; }
 
+        [DefaultValue(0)]
+        public int currentCapacity { get; set; }
+
         public virtual ICollection<Users> currentUsers { get; set; }
 
         public virtual ICollection<Questions> askedQuestions { get; set; }

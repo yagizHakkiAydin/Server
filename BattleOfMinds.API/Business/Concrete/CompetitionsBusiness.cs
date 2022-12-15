@@ -2,7 +2,9 @@
 using BattleOfMinds.Core.DataAccess;
 using BattleOfMinds.Core.Entity;
 using BattleOfMinds.Models.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BattleOfMinds.API.Business
 {
@@ -11,11 +13,12 @@ namespace BattleOfMinds.API.Business
 
         private readonly IEntityRepository<Competitions> _entityRepository;
         private readonly IEntityRepository<Users> _usersEntityRepository;
-
-        public CompetitionsBusiness(IEntityRepository<Competitions> entityRepository, IEntityRepository<Users> usersEntityRepository)
+        private readonly IEntityRepository<Questions> _questionsEntityRepository;
+        public CompetitionsBusiness(IEntityRepository<Competitions> entityRepository, IEntityRepository<Users> usersEntityRepository, IEntityRepository<Questions> questionsEntityRepository)
         {
             _entityRepository = entityRepository;
             _usersEntityRepository = usersEntityRepository;
+            _questionsEntityRepository= questionsEntityRepository;
         }
 
         public Task<Competitions> Add(Competitions Entity)
@@ -26,7 +29,7 @@ namespace BattleOfMinds.API.Business
 
         public async Task<Competitions> Get(Expression<Func<Competitions, bool>> filter = null, params Expression<Func<Competitions, object>>[] includes)
         {
-            var result =  _entityRepository.Get(filter, includes).Result;
+            var result = _entityRepository.Get(filter, includes).Result;
             return result;
         }
 
@@ -34,7 +37,7 @@ namespace BattleOfMinds.API.Business
         {
             List<Competitions> questions = new List<Competitions>();
 
-            return await _entityRepository.GetAll(filter,includes);
+            return await _entityRepository.GetAll(filter, includes);
 
         }
 
@@ -44,11 +47,20 @@ namespace BattleOfMinds.API.Business
         }
 
 
+        public Task<Competitions> Remove(Competitions Entity)
+        {
+
+            return _entityRepository.Remove(Entity);
+
+        }
+
+
+
         public async Task<Users> findCompetition(int userId, string GameMode)
         {
 
             var result = await _entityRepository.Get(o => o.GameMode.Equals(GameMode) && o.isStarted.Equals(false), o => o.currentUsers);
-            
+
             var user = _usersEntityRepository.Get(o => o.Id.Equals(userId)).Result;
 
             if (result == null)
@@ -91,6 +103,128 @@ namespace BattleOfMinds.API.Business
 
             var result = _entityRepository.Get(o => o.Id.Equals(competitionId)).Result;
             return result.isStarted;
+        }
+
+        public async Task<Questions> getQuestion(int competitionId)
+        {
+
+            List<Questions> list = await _questionsEntityRepository.GetAll(o => o.isDeleted.Equals(false) && o.isApproved.Equals(true));
+
+            Random rndm = new Random();
+
+            int questionIndex;
+            Questions question;
+
+            do
+            {
+                questionIndex = rndm.Next(0, list.Count);
+
+                question = list.ElementAt(questionIndex);
+
+            } while (question.CompetitionsId != 1);
+
+            question.CompetitionsId = competitionId;
+
+            await _questionsEntityRepository.Update(question);
+
+            return question;
+        }
+
+        public async Task<int> decreaseCapacity(int competitionId)
+        {
+
+            var result = await _entityRepository.Get(o => o.Id.Equals(competitionId), o => o.currentUsers);
+
+            result.currentCapacity = result.currentUsers.Count - 1;
+
+            await _entityRepository.Update(result);
+
+            return result.currentCapacity;
+
+
+        }
+
+        public async Task<bool> wrongAnswer([FromBody] Users user)
+        {
+
+            user.CompetitionsId = 1;
+            await _usersEntityRepository.Update(user);
+            return true;
+
+        }
+
+        public async Task<bool> trueAnswer([FromBody] Users user)
+        {
+
+            var result = await _entityRepository.Get(o => o.Id.Equals(user.CompetitionsId));
+
+            if (result.currentCapacity - 1 == 0)
+            {
+
+                user.CompetitionsId = 1;
+                await _usersEntityRepository.Update(user);
+                return false;
+
+            }
+            else
+            {
+
+                result.currentCapacity -= 1;
+
+                await _entityRepository.Update(result);
+
+                return true;
+
+            }
+
+
+
+        }
+
+
+        public async Task<int> getCurrentCapacity(int competitionId)
+        {
+
+            var result = await _entityRepository.Get(o => o.Id.Equals(competitionId));
+
+            return result.currentCapacity;
+
+        }
+
+
+        public async Task<bool> deleteCompetition(int competitionId)
+        {
+
+            var result = await _entityRepository.Get(o => o.Id.Equals(competitionId), o => o.currentUsers, o => o.askedQuestions);
+
+            ICollection<Users> UsersList = result.currentUsers;
+
+            int border = UsersList.Count;
+
+            for (int i = 0; i < border; i++)
+            {
+             
+                UsersList.ElementAt(i).CompetitionsId = 1;
+                await _usersEntityRepository.Update(UsersList.ElementAt(i));
+
+            }
+
+            ICollection<Questions> QuestionsList = result.askedQuestions;
+
+            border = QuestionsList.Count;
+
+            for (int i = 0; i < border; i++)
+            {
+             
+                QuestionsList.ElementAt(i).CompetitionsId = 1;
+                await _questionsEntityRepository.Update(QuestionsList.ElementAt(i));
+
+            }
+
+            await _entityRepository.Update(result);
+            await _entityRepository.Remove(result);
+
+            return true;
         }
 
     }

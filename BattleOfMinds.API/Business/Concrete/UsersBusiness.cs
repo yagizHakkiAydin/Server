@@ -37,6 +37,12 @@ namespace BattleOfMinds.API.Business
             return _entityRepository.Update(Entity);
         }
 
+        public Task<Users> Remove(Users Entity)
+        {
+
+            return _entityRepository.Remove(Entity);
+
+        }
         public async Task<string> Register([FromBody] Users users)
         {
             var result = _entityRepository.GetAll(o => o.Email.Equals(users.Email) && o.isDeleted == false).Result.FirstOrDefault();
