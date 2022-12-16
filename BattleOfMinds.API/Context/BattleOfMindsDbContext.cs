@@ -10,7 +10,7 @@ namespace BattleOfMinds.API.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
-            dbContextOptionsBuilder.UseSqlServer(@"Server=.;Database=BattleOfMindsDb;User Id=sa;Password=Sakarya54;Trust Server Certificate=True;");
+            dbContextOptionsBuilder.UseSqlServer(@"Server=BattleOfMindsPc\SQLSERVER;Database=BattleOfMindsDb;User Id=sa;Password=Bom_123.!;Trust Server Certificate=True;");
             dbContextOptionsBuilder.ConfigureWarnings(w => w.Ignore(CoreEventId.StateChanged,
                                                            CoreEventId.DetectChangesCompleted,
                                                            CoreEventId.DetectChangesStarting,
