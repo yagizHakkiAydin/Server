@@ -37,6 +37,9 @@ namespace BattleOfMinds.API.Migrations
                     b.Property<int>("currentCapacity")
                         .HasColumnType("int");
 
+                    b.Property<int>("currentQuestionId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("isStarted")
                         .HasColumnType("bit");
 

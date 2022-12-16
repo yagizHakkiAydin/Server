@@ -76,8 +76,12 @@ namespace BattleOfMinds.API.Business
 
 
                 var _newCompetition = await _entityRepository.Add(newCompetition);
+                await _entityRepository.Update(_newCompetition);
+
+                await chooseQuestion(_newCompetition.Id);
 
                 user.CompetitionsId = _newCompetition.Id;
+               
                 await _usersEntityRepository.Update(user);
 
             }
@@ -105,7 +109,7 @@ namespace BattleOfMinds.API.Business
             return result.isStarted;
         }
 
-        public async Task<Questions> getQuestion(int competitionId)
+        public async Task<Questions> chooseQuestion(int competitionId)
         {
 
             List<Questions> list = await _questionsEntityRepository.GetAll(o => o.isDeleted.Equals(false) && o.isApproved.Equals(true));
@@ -125,10 +129,27 @@ namespace BattleOfMinds.API.Business
 
             question.CompetitionsId = competitionId;
 
+            var result = await _entityRepository.Get(o => o.Id.Equals(competitionId));
+
             await _questionsEntityRepository.Update(question);
 
+            result.currentQuestionId = question.Id;
+
+            await _entityRepository.Update(result);
+            
             return question;
         }
+
+
+        public async Task<Questions> getQuestion(int competitionId)
+        {
+
+            var result = await _entityRepository.Get(o => o.Id.Equals(competitionId));
+
+            return await _questionsEntityRepository.Get(o => o.Id.Equals(result.currentQuestionId));
+
+        }
+
 
         public async Task<int> decreaseCapacity(int competitionId)
         {
@@ -143,6 +164,21 @@ namespace BattleOfMinds.API.Business
 
 
         }
+
+
+        public async Task<bool> exitCompetition(int userId)
+        {
+
+            var result = await _usersEntityRepository.Get(o => o.Id.Equals(userId));
+
+            result.CompetitionsId = 1;
+
+            await _usersEntityRepository.Update(result);
+
+            return true;
+
+        }
+
 
         public async Task<bool> wrongAnswer([FromBody] Users user)
         {
@@ -203,9 +239,11 @@ namespace BattleOfMinds.API.Business
 
             for (int i = 0; i < border; i++)
             {
-             
-                UsersList.ElementAt(i).CompetitionsId = 1;
-                await _usersEntityRepository.Update(UsersList.ElementAt(i));
+
+
+                var user = await _usersEntityRepository.Get(o => o.Id.Equals(UsersList.ElementAt(i).Id));
+                user.CompetitionsId = 1;
+                await _usersEntityRepository.Update(user);
 
             }
 
@@ -215,14 +253,16 @@ namespace BattleOfMinds.API.Business
 
             for (int i = 0; i < border; i++)
             {
-             
-                QuestionsList.ElementAt(i).CompetitionsId = 1;
-                await _questionsEntityRepository.Update(QuestionsList.ElementAt(i));
+
+                var question = await _questionsEntityRepository.Get(o => o.Id.Equals(QuestionsList.ElementAt(i).Id));
+                question.CompetitionsId = 1;
+                await _questionsEntityRepository.Update(question);
 
             }
-
-            await _entityRepository.Update(result);
-            await _entityRepository.Remove(result);
+            result.askedQuestions = null;
+            result.currentUsers = null;
+           var r =  await _entityRepository.Update(result);
+           var r1 = await _entityRepository.Remove(result);
 
             return true;
         }

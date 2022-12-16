@@ -65,6 +65,15 @@ namespace BattleOfMinds.API.Controllers
         }
 
 
+        [HttpGet]
+        [Route("chooseQuestion")]
+        public async Task<Questions> chooseQuestion(int competitionId)
+        {
+
+            return await _competitionsBusiness.chooseQuestion(competitionId);
+        
+        }
+
 
         [HttpGet]
         [Route("getQuestion")]
@@ -72,6 +81,16 @@ namespace BattleOfMinds.API.Controllers
         {
 
             return await _competitionsBusiness.getQuestion(competitionId);
+        
+        }
+
+
+        [HttpGet]
+        [Route("exitCompetition")]
+        public async Task<bool> exitCompetition(int userId)
+        {
+
+            return await _competitionsBusiness.exitCompetition(userId);
         
         }
 

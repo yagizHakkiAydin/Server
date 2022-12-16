@@ -30,6 +30,9 @@ namespace BattleOfMinds.Models.Models
         [DefaultValue(0)]
         public int currentCapacity { get; set; }
 
+        [DefaultValue(0)]
+        public int currentQuestionId { get; set; }
+
         public virtual ICollection<Users> currentUsers { get; set; }
 
         public virtual ICollection<Questions> askedQuestions { get; set; }

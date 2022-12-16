@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BattleOfMinds.API.Migrations
 {
     [DbContext(typeof(BattleOfMindsDbContext))]
-    [Migration("20221215190211_initialize")]
+    [Migration("20221216183253_initialize")]
     partial class initialize
     {
         /// <inheritdoc />
@@ -38,6 +38,9 @@ namespace BattleOfMinds.API.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("currentCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("currentQuestionId")
                         .HasColumnType("int");
 
                     b.Property<bool>("isStarted")

@@ -14,11 +14,13 @@ namespace BattleOfMinds.API.Business.Abstract
         public Task<Users> findCompetition(int userId, string GameMode);
         public Task<bool> isStarted(int competitionId);
         public Task<Questions> getQuestion(int competitionId);
+        public Task<Questions> chooseQuestion(int competitionId);
         public Task<int> decreaseCapacity(int competitionId);
         public Task<bool> wrongAnswer([FromBody] Users user);
         public Task<bool> trueAnswer([FromBody] Users user);
         public Task<int> getCurrentCapacity(int competitionId);
         public Task<bool> deleteCompetition(int competitionId);
+        public Task<bool> exitCompetition(int userId);
 
     }
 }
