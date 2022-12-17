@@ -151,12 +151,14 @@ namespace BattleOfMinds.API.Business
         }
 
 
-        public async Task<int> decreaseCapacity(int competitionId)
+        public async Task<int> resetCapacity(int competitionId)
         {
 
             var result = await _entityRepository.Get(o => o.Id.Equals(competitionId), o => o.currentUsers);
 
-            result.currentCapacity = result.currentUsers.Count - 1;
+            if (result.currentCapacity <= 2) result.currentCapacity = 1;
+
+            else result.currentCapacity = result.currentUsers.Count - (result.currentUsers.Count*2/5);
 
             await _entityRepository.Update(result);
 
@@ -194,7 +196,7 @@ namespace BattleOfMinds.API.Business
 
             var result = await _entityRepository.Get(o => o.Id.Equals(user.CompetitionsId));
 
-            if (result.currentCapacity - 1 == 0)
+            if (result.currentCapacity == 0)
             {
 
                 user.CompetitionsId = 1;

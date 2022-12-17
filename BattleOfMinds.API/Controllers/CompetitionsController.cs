@@ -97,11 +97,11 @@ namespace BattleOfMinds.API.Controllers
 
 
         [HttpGet]
-        [Route("decreaseCapacity")]
-        public async Task<int> decreaseCapacity(int competitionId)
+        [Route("resetCapacity")]
+        public async Task<int> resetCapacity(int competitionId)
         {
 
-            return await _competitionsBusiness.decreaseCapacity(competitionId);
+            return await _competitionsBusiness.resetCapacity(competitionId);
         
         }
 
