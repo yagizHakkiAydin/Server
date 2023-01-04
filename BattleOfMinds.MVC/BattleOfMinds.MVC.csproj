@@ -203,6 +203,7 @@
     <None Include="wwwroot\css\theme.css" />
     <None Include="wwwroot\css\themify-icons.css" />
     <None Include="wwwroot\css\typography.css" />
+    <None Include="wwwroot\dataTables\datatables.min.js" />
     <None Include="wwwroot\js\animsition.min.js" />
     <None Include="wwwroot\js\app-style-switcher.js" />
     <None Include="wwwroot\js\bar-chart.js" />
@@ -288,6 +289,13 @@
     <None Include="wwwroot\js\DataTables\responsive.jqueryui.min.js" />
     <None Include="wwwroot\js\DataTables\responsive.semanticui.js" />
     <None Include="wwwroot\js\DataTables\responsive.semanticui.min.js" />
+    <None Include="wwwroot\js\dist\core.js" />
+    <None Include="wwwroot\js\dist\jquery.js" />
+    <None Include="wwwroot\js\dist\jquery.min.js" />
+    <None Include="wwwroot\js\dist\jquery.min.map" />
+    <None Include="wwwroot\js\dist\jquery.slim.js" />
+    <None Include="wwwroot\js\dist\jquery.slim.min.js" />
+    <None Include="wwwroot\js\dist\jquery.slim.min.map" />
     <None Include="wwwroot\js\Homejs\bootstrap.min.js" />
     <None Include="wwwroot\js\Homejs\custom.js" />
     <None Include="wwwroot\js\Homejs\imagesloaded.min.js" />

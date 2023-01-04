@@ -38,6 +38,43 @@ namespace BattleOfMinds.API.Controllers
             return questions;
         
         }
+
+
+        [HttpGet]
+        [Route("GetApprovedQuestions")]
+        public async Task<IEnumerable<Questions>> GetApproved()
+        {
+            var questions = await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false) && o.isApproved.Equals(true));
+
+            return questions;
+
+        }
+
+
+
+        [HttpGet]
+        [Route("GetNonApprovedQuestions")]
+        public async Task<IEnumerable<Questions>> GetNonApproved()
+        {
+            var questions = await _questionsBusiness.GetAll(o => o.isDeleted.Equals(false) && o.isApproved.Equals(false));
+
+            return questions;
+
+        }
+
+
+        [HttpGet]
+        [Route("GetDeletedQuestions")]
+        public async Task<IEnumerable<Questions>> GetDeleted()
+        {
+            var questions = await _questionsBusiness.GetAll(o => o.isDeleted.Equals(true) && o.isApproved.Equals(true));
+
+            return questions;
+
+        }
+
+
+
         /*
         [HttpGet]
         [Route("GetQuestions")]
@@ -74,9 +111,12 @@ namespace BattleOfMinds.API.Controllers
         */
         [HttpPost]
         [Route("Add")]
-        public async Task<Questions> Add(Questions questions)
+        public async Task<bool> Add(Questions questions)
         {
-            return await _questionsBusiness.Add(questions);
+            var r = await _questionsBusiness.Add(questions);
+
+            if (r != null) return true;
+            else return false;
         }
 
         [HttpDelete]
@@ -114,6 +154,22 @@ namespace BattleOfMinds.API.Controllers
             var result = await _questionsBusiness.Get(o => o.Id.Equals(questionId));
             return await _questionsBusiness.Remove(result);
         
+        }
+
+
+        [HttpGet]
+        [Route("DeleteQuestion")]
+        public async Task<bool> DeleteQuestion(int id)
+        {
+
+            var result = await _questionsBusiness.Get(o => o.Id.Equals(id));
+            result.isDeleted = true;
+            var result2 = await _questionsBusiness.Update(result);
+
+            if (result2 == null) return false;
+            else return true;
+
+
         }
 
     }

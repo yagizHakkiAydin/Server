@@ -40,7 +40,7 @@
         </div>
         <div class="icons">
         <button class="btn" id="btn1" >
-        <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1" onclick="alertFunction()"></i>
+        <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1"></i>
         </button>
         <button class="btn" id="btn2">
         <i class="fa-solid fa-circle-xmark fa-2xl" id="icon2" onclick="deleteFunction()"></i>
@@ -48,6 +48,35 @@
         </div>
 
 
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/jquery.slimscroll.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+
+
+
+    <script>
+        $("#icon1").click(function () {
+           
+                    $.ajax({
+                        type: 'post',
+                        url: '/Add/AddQuestionClassic',
+                        data: {
+                            'qdes': $("#qarea").val(),
+                            'category': $("#question-category").val(),
+                            'answer': $("#answer-inp").val(),
+                    
+                        }
+                    
+                
+            })
+        });
+    </script>
 
 
 

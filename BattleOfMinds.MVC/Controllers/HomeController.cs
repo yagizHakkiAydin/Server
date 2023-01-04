@@ -38,8 +38,17 @@ namespace BattleOfMinds.MVC.Controllers
             return View("Index2");
         }
 
-        public IActionResult AllQuestions(){
-            return View("Index3");
+        public async Task<IActionResult> AllQuestions(){
+
+            List<Questions> questions = new List<Questions>();
+            questions = await _serviceCommuniction.GetResponseList<Questions>("api/Questions/GetApprovedQuestions");
+            return View(questions);
+        }
+
+        public async Task<string> DeleteQuestion(int id)
+        {
+            var r = await _serviceCommuniction.GetResponse("api/Questions/DeleteQuestion?id="+id);
+            return r;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using BattleOfMinds.Core.Entity;
+using BattleOfMinds.Models.Models;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
@@ -29,7 +31,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<string> GetResponse(string weburl)
         {
-            Uri url = new Uri("http://20.223.182.23:8082/");
+            Uri url = new Uri("http://20.13.1.26:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             using HttpRequestMessage request = new(HttpMethod.Get, weburl);
@@ -41,7 +43,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<T> GetResponseWithoutToken<T>(string weburl) where T : class
         {
-            Uri url = new Uri("http://20.223.182.23:8082/");
+            Uri url = new Uri("http://20.13.1.26:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             var response = await client.GetAsync(weburl);
@@ -56,7 +58,7 @@ namespace BattleOfMinds.MVC.Communication
 
         public async Task<List<T>> GetResponseList<T>(string weburl)
         {
-            Uri url = new Uri("http://20.223.182.23:8082/");
+            Uri url = new Uri("http://20.13.1.26:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
             using HttpRequestMessage request = new(HttpMethod.Get, weburl);
@@ -71,7 +73,7 @@ namespace BattleOfMinds.MVC.Communication
             }
             return null;
         }
-        public async Task<HttpResponseMessage> PostResponse<T>(string weburl, object data)
+        public async Task<string> PostResponse<T>(string weburl, object data)
         {
             return await SendAsync<T>(weburl, HttpMethod.Post, data);
         }
@@ -84,18 +86,19 @@ namespace BattleOfMinds.MVC.Communication
         }
 
 
-        private async Task<HttpResponseMessage> SendAsync<T>(string address, HttpMethod httpMethod, object data)
+        private async Task<string> SendAsync<T>(string address, HttpMethod httpMethod, object data)
         {
 
-            Uri url = new Uri("http://20.223.182.23:8082/");
+            Uri url = new Uri("http://20.13.1.26:8082/");
             using HttpClient client = new HttpClient();
-            client.BaseAddress = url;
+            address = url + address;
             using HttpRequestMessage request = new(httpMethod, address);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             using Stream stream = await SerializeObjectIntoStream(data);
             stream.Seek(0, SeekOrigin.Begin);
             using StreamContent requestContent = new(stream);
+
 
             if (data != null && httpMethod != HttpMethod.Get && httpMethod != HttpMethod.Delete)
             {
@@ -104,9 +107,9 @@ namespace BattleOfMinds.MVC.Communication
             }
 
             requestContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var json = await client.GetStringAsync(request.RequestUri);
             using HttpResponseMessage result = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-            return result;
+            return await result.Content.ReadAsStringAsync();
+
 
         }
 

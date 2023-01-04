@@ -66,11 +66,11 @@
         </div>
         <div class="true-answer">
             <label class="answer-label" for="true-answer">Correct Answer</label>
-            <input class="true-answer-inp" type="text">
+            <input id = "answer-inp" class ="true-answer-inp" type="text">
         </div>
         <div class="icons">
 
-            <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1" onclick="alertFunction()"></i>
+                <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1" onclick="alertFunction(); add();"></i>
 
 
             <i class="fa-solid fa-circle-xmark fa-2xl" id="icon2" onclick="deleteFunction()"></i>
@@ -78,9 +78,43 @@
         </div>
 
 
-
     </form>
 </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/jquery.slimscroll.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+
+
+
+    <script>
+        function add() {
+
+                    $.ajax({
+                        type: 'post',
+                        url: '/Add/AddQuestionMultiple',
+                        data: {
+                            'qdes': $("#qarea").val(),
+                            'category': $("#question-category").val(),
+                            'answer': $("#answer-inp").val(),
+                            'option1': $("#input1").val(),
+                            'option2': $("#input2").val(),
+                            'option3': $("#input3").val(),
+                            'option4': $("#input4").val(),
+                        }
+                    
+                
+                    })
+                    }
+
+    </script>
+
 
 </body>
 </html>

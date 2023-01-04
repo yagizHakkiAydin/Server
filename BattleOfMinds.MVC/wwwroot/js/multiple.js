@@ -21,7 +21,7 @@ function alertFunction() {
     else{
         alert("Your question has been saved.");
     }
-    
+
 }
 
 function deleteFunction() {
