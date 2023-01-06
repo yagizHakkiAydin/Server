@@ -1,0 +1,113 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url(/images/SciFiBg003_Blue.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+section#topnav .menu-icon {
+    padding: 10px;
+    background-color: transparent;
+    display: none;
+}
+
+    section#topnav .menu-icon i {
+        font-size: 1.25em;
+        cursor: pointer;
+        color: #fff;
+    }
+
+section#topnav nav {
+    width: 100%;
+    height: 85px;
+    background: transparent;
+    border-bottom: 1.25px solid rgba(149, 149, 149, 0.25);
+    position: relative;
+    margin-top:30px;
+
+}
+
+    section#topnav nav ul {
+        max-width: 1040px;
+        margin: auto;
+        display: flex;
+        background-color: transparent;
+        list-style-type: none;
+        
+        
+
+    }
+
+        section#topnav nav ul li {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+            section#topnav nav ul li a {
+                display: block;
+                text-decoration: none;
+                color: #fff;
+                padding: 12px 5px;
+                font-size: 18px;
+                text-transform: uppercase;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                transition: background-color .250s ease-in-out;
+            }
+
+                section#topnav nav ul li a:hover {
+                    color: white !important;
+                    
+                   
+                    text-decoration: none !important;
+                    box-shadow: 0 0 10px #69EBFD;
+                    transition: .4s;
+                }
+
+                section#topnav nav ul li a i {
+                    margin-right: 5px;
+                }
+
+@media (max-width: 600px) {
+    body {
+        overflow: hidden;
+    }
+
+    section#topnav .menu-icon {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    section#topnav nav ul {
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        z-index: 99;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform .25s ease-in-out;
+    }
+
+        section#topnav nav ul.active {
+            transform: scaleY(1);
+        }
+
+        section#topnav nav ul li {
+            text-align: left;
+        }
+            section#topnav nav ul li a {
+               font-size:0.75em;
+            }
+
+            section#topnav nav ul li a i {
+                margin: 0 17px 0 7px;
+            }
+}
