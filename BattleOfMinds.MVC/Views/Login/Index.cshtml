@@ -1,0 +1,95 @@
+﻿@model BattleOfMinds.Models.Models.Users
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class = "header">
+        <div id = "login-box">
+            <form method="post" action="/Login/SignIn" class ="form">
+                <h1>SIGN IN</h1>
+                <div class = "text-box">
+                <i class="fas fa-user" id="username-icon"></i>
+                <input type = "text" name = "email" placeholder = "Enter Email" id = "email" class="input" >
+                </div>
+                <div class="text-box">
+                <i class="fa-solid fa-lock" id="password-icon"></i>
+                <input type = "password" class = "input"name = "password" placeholder = "Enter Password" id = "password">
+                </div>
+                <div class="submit">
+                <input type = "submit" name = "Submit" id="sbmt">
+                </div>
+                <div class="row mb-4 rmber-area">
+                    <a class="btn btn-outline-success" id="btnpass"></a>
+                    <div class="col-6 text-right">
+                        <a href="/Login/ForgetPassword" id="forget-pass">Forget Password?</a>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+
+
+    </header>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- bootstrap 4 js -->
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/metisMenu.min.js"></script>
+    <script src="~/js/jquery.slimscroll.min.js"></script>
+    <script src="~/js/jquery.slicknav.min.js"></script>
+
+    <!-- others plugins -->
+    <script src="~/js/plugins.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script>
+        $("#btnpass").click(function () {
+            swal({
+                title: 'Reset Password',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                closeOnConfirm: false
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Login/SignUp',
+                        data: {
+                            'userEmail': $("#userEmail").val(),
+                        },
+                        success: function (data) {
+                            if (data == 'true') {
+                                swal('Success!', 'New password has been sent to your e-mail address.', 'success').then((result) => {
+                                    if (result.value) {window.location = "/Index";}
+                                });
+                            }
+                            else {
+                                swal('Wrong E-Mail!', 'Email address is not registered', 'error');
+                            }
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+
+</body>
+</html>
