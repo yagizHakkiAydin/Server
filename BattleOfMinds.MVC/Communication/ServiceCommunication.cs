@@ -46,7 +46,9 @@ namespace BattleOfMinds.MVC.Communication
             Uri url = new Uri("http://20.13.1.26:8082/");
             using HttpClient client = new HttpClient();
             client.BaseAddress = url;
-            var response = await client.GetAsync(weburl);
+            using HttpRequestMessage request = new(HttpMethod.Get, weburl);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var response = await client.GetAsync(request.RequestUri);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 var jsonresult = response.Content.ReadAsStringAsync().Result;

@@ -5,7 +5,7 @@ function addCode(question_list,id_list) {
             '<div class="short-question" id = '+ id_list[i] +'>\
       '+question_list[i].substring(0,46)+'  \
       <i class="fa-solid fa-trash" onclick="DeleteOnclick('+ id_list[i] + ')"></i>\
-      <a href = "/Questions/Edit"><i class="fa-sharp fa-solid fa-pen"></i></a>\
+      <a href = "/Questions/Edit?id='+ id_list[i] +'" ><i class="fa-sharp fa-solid fa-pen"></i></a>\
     </div>';
     
             document.getElementById("questions").innerHTML +=html;

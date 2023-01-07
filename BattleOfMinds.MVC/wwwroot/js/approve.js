@@ -29,8 +29,8 @@ function addCode(question_list, id_list) {
         let html =
             '<div class="short-question" id = ' + id_list[i] + '>\
       '+ question_list[i].substring(0, 46) + '  \
-      <i class="fa-solid fa-regular fa-x" onclick="DeleteOnclick('+ id_list[i] + ')"></i>\
-      <a href = "/Questions/Edit"><i class="fa-solid fa-check"></i></a>\
+      <a href = "/Questions/Reject?id='+ id_list[i] +'"> <i class="fa-solid fa-regular fa-x"></i></a>\
+      <a href = "/Questions/Approve?id='+ id_list[i] +'"><i class="fa-solid fa-check"></i></a>\
     </div>';
 
         document.getElementById("questions").innerHTML += html;

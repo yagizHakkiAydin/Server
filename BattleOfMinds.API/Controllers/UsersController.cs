@@ -18,7 +18,13 @@ namespace BattleOfMinds.API.Controllers
             _usersBusiness = usersBusiness;
         }
 
-        
+        [HttpGet]
+        [Route("GetAllPlayers")]
+        public async Task<IEnumerable<Users>> GetAllPlayers()
+        {
+            return await _usersBusiness.GetAll(o => o.isDeleted.Equals(false) && o.UserType.Equals("Player"));
+        }
+
 
         [HttpGet]
         public async Task<IEnumerable<Users>> GetAll()

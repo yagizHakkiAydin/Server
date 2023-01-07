@@ -63,17 +63,26 @@ namespace BattleOfMinds.API.Business
 
             var user = _usersEntityRepository.Get(o => o.Id.Equals(userId)).Result;
 
+
             if (result == null)
             {
 
                 Competitions newCompetition = new Competitions();
 
                 newCompetition.GameMode = GameMode;
-                if (GameMode == "OnevsOne") newCompetition.userCapacity = 2;
-                else if (GameMode == "BattleRoyals") newCompetition.userCapacity = 20;
-                newCompetition.isStarted = false;
-
-
+                if (GameMode == "OnevsOne")
+                {
+                    newCompetition.userCapacity = 2;
+                    newCompetition.currentCapacity = 2;
+                }
+                else if (GameMode == "BattleRoyals")
+                {
+                    newCompetition.userCapacity = 4;
+                    newCompetition.currentCapacity = 4;
+                }
+                    
+                    newCompetition.isStarted = false;
+               
 
                 var _newCompetition = await _entityRepository.Add(newCompetition);
                 await _entityRepository.Update(_newCompetition);
@@ -156,9 +165,11 @@ namespace BattleOfMinds.API.Business
 
             var result = await _entityRepository.Get(o => o.Id.Equals(competitionId), o => o.currentUsers);
 
-            if (result.currentCapacity <= 2) result.currentCapacity = 1;
+            if (result.currentUsers.Count == 2) result.currentCapacity = 1;
 
-            else result.currentCapacity = result.currentUsers.Count - (result.currentUsers.Count*2/5);
+            else if(result.currentUsers.Count == 1) result.currentCapacity = 0;
+
+            else result.currentCapacity = result.currentUsers.Count - ((result.currentUsers.Count)*2/5);
 
             await _entityRepository.Update(result);
 

@@ -23,7 +23,8 @@ namespace BattleOfMinds.API.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("GetQuestion")]
         public async Task<Questions> Get(int id)
         {
             return await _questionsBusiness.Get(o => o.Id.Equals(id) && o.isDeleted.Equals(false));
@@ -127,11 +128,16 @@ namespace BattleOfMinds.API.Controllers
             return await _questionsBusiness.Update(result);
         }
 
-        [HttpPut]
-        public async Task<Questions> Update(Questions questions)
+        [HttpPost]
+        [Route("Update")]
+        public async Task<bool> Update(Questions questions)
         {
 
-            return await _questionsBusiness.Update(questions);
+            var r = await _questionsBusiness.Update(questions);
+
+            if (r == null) return false;
+            else return true;
+
         }
 
         [HttpGet]

@@ -40,7 +40,7 @@
         </div>
         <div class="icons">
         <button class="btn" id="btn1" >
-        <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1"></i>
+                <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1" onclick="alertFunction(); add();"></i>
         </button>
         <button class="btn" id="btn2">
         <i class="fa-solid fa-circle-xmark fa-2xl" id="icon2" onclick="deleteFunction()"></i>
@@ -61,7 +61,7 @@
 
 
     <script>
-        $("#icon1").click(function () {
+        function add() {
            
                     $.ajax({
                         type: 'post',
@@ -75,7 +75,8 @@
                     
                 
             })
-        });
+
+        }
     </script>
 
 

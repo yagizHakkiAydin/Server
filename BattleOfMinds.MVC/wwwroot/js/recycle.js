@@ -1,5 +1,5 @@
 
-let question_list = [];
+
 
 const noQuestion = () => {
         
@@ -12,10 +12,10 @@ const noQuestion = () => {
 }
 
 
-const addCode = () => {
+const addCode = (question_list, id_list) => {
     for(let i = 0 ; i < question_list.length;i++){
     let html =
-    '<div class="short-question" id = "q'+i+'">\
+        '<div class="short-question" id = ' + id_list[i] +'>\
       '+question_list[i].substring(0,46)+'  \
       <i class="fa-solid fa-trash" onclick ="onClick()"></i>\
       <i class="fa-sharp fa-solid fa-pen"></i>\
@@ -36,5 +36,6 @@ const onClick = (event) => {
       window.addEventListener('click', onClick);
       */
       
-      noQuestion();
+noQuestion();
+addCode();
       

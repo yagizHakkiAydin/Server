@@ -33,14 +33,20 @@ namespace BattleOfMinds.MVC.Controllers
             return View("Index1");
         }
 
-        public IActionResult Recycle()
+        public async Task<IActionResult> Recycle()
         {
-            return View("Index2");
+            List<Questions> questions = new List<Questions>();
+            questions = await _serviceCommuniction.GetResponseList<Questions>("api/Questions/GetDeletedQuestions");
+            return View(questions);
         }
 
-        public IActionResult Correction()
+
+
+        public async Task<IActionResult> Correction()
         {
-            return View("Index4");
+            List<Questions> questions = new List<Questions>();
+            questions = await _serviceCommuniction.GetResponseList<Questions>("api/Questions/GetNonApprovedQuestions");
+            return View(questions);
         }
 
 
