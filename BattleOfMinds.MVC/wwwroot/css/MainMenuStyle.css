@@ -27,7 +27,7 @@ section#topnav .menu-icon {
 
 section#topnav nav {
     width: 100%;
-    height: 85px;
+    height: 65px;
     background: transparent;
     border-bottom: 1.25px solid rgba(149, 149, 149, 0.25);
     position: relative;
@@ -75,6 +75,22 @@ section#topnav nav {
                 section#topnav nav ul li a i {
                     margin-right: 5px;
                 }
+
+
+#myVideo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background: url(/images/SciFiBg003_Blue.png) no-repeat;
+    background-size: cover;
+}
+
 
 @media (max-width: 600px) {
     body {

@@ -73,3 +73,13 @@ body{
     color: #29aafd;
 
   }
+
+.fa-home {
+    
+   
+    background: transparent;
+    position: absolute;
+    top: 40px ;
+    right: 40px;
+    color: aliceblue !important;
+}
