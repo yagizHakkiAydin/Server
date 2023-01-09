@@ -14,7 +14,7 @@ const addCode = (question_list, id_list) => {
     for(let i = 0 ; i < question_list.length;i++){
     let html =
         '<div class="short-question" id = ' + id_list[i] +'>\
-      '+question_list[i].substring(0,46)+'\
+      '+question_list[i]+'\
     </div>';
     
             document.getElementById("questions").innerHTML +=html;
