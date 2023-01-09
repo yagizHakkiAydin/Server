@@ -1,0 +1,103 @@
+﻿@model IList<BattleOfMinds.Models.Models.Questions>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/css/allquestion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="~/js/allquestions.js"></script>
+</head>
+<body>
+        <div class="all-questions" id="questions"></div>
+    @Html.ActionLink("", "Index", "Home", null, new { @class="btn btn-info fa fa-home fa-xl"})
+            <script type="text/javascript">
+
+                let question_list = [];
+                let id_list = [];
+
+                @foreach (var item in Model)
+                {
+                    @:question_list.push("@item.QuestionDescription");
+                    @:id_list.push("@item.Id");
+
+                }
+
+                    addCode(question_list,id_list);
+            </script>
+
+            @*<table class="short-question">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td hidden>@item.Id class = "short-question"</td>
+                            <td>@item.QuestionDescription</td>
+                            <td>
+                                <a onclick="EditOnclick('@item.Id')">
+                                    <i class="fa-sharp fa-solid fa-pen"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a onclick="DeleteOnclick('@item.Id')">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+
+</body>
+</html>
+
+<script>
+
+function DeleteOnclick(id) {
+            $.get("/Home/DeleteQuestion", { Id: id },
+                function (data) {
+                    if (data) {
+                        window.location.reload();
+                    }
+                    else {
+
+                        return false;
+                    }
+                });
+
+
+            //swal({
+            //    title: "Silme Onayı",
+            //    text: "Kaydı silmek istediğinize emin misiniz?",
+            //    type: 'warning',
+            //    showCancelButton: true,
+            //    confirmButtonText: 'Sil!',
+            //    cancelButtonText: 'İptal!'
+            //},
+            //    function(isConfirm) {
+            //        if (isConfirm) {
+            //            $.get("/Unit/Sil", { Id : id },
+            //                function(data) {
+            //                    if (data) {
+            //                        window.location.reload();
+            //                    }
+            //                    else {
+            //                        swal('An error occurred!', 'Something went wrong!', 'warning');
+            //                        return false;
+            //                    }
+            //            });
+
+            //        }
+            //});
+        }
+
+    </script>
