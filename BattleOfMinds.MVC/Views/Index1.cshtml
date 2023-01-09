@@ -1,26 +1,31 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Classic Question</title>
-    <link rel="stylesheet" href="~/css/classic.css">
+    <title>Add Multiple Choice Question</title>
+    <link rel="stylesheet" href="~/css/multiple.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <script src="~/js/classic.js"></script>
+    <script src="~/js/multiple.js"></script>
 </head>
-<body >
+<body>
 
-    <div class="classicq">
-
+    <div class="multiple">
+        <form action="initial" id="myform">
         <div class="question">
+
             <label id="question-label" for="question">Question</label>
             <textarea name="question-area" id="qarea" cols="38" rows="5"></textarea>
         </div>
+        <br>
         <div class="category">
             <label for="category" id="label-category">Category</label>
             <select name="question-category" id="question-category">
@@ -34,21 +39,49 @@
 
             </select>
         </div>
-        <div class="answer">
-            <label id="answer-label" for="answer">Answer </label>
-            <input id="answer-inp" type="text">
+        <div class="allanswer">
+        <div id = "answer1" class="answer">
+            <label class="answer-label" for="answer">Choice-1 </label>
+            <input id = "input1" class ="answer-inp"  type="text">
+           
+        </div>
+
+        <div id = "answer2" class="answer">
+            <label class="answer-label" for="answer">Choice-2 </label>
+            <input id = "input2" class ="answer-inp"  type="text">
+            
+        </div>
+
+        <div id = "answer3" class="answer">
+            <label class="answer-label" for="answer">Choice-3 </label>
+            <input id = "input3" class ="answer-inp"  type="text">
+           
+        </div>
+
+        <div id = "answer4" class="answer">
+            <label class="answer-label" for="answer">Choice-4 </label>
+            <input id = "input4" class ="answer-inp"  type="text">
+           
+        </div>
+        </div>
+        <div class="true-answer">
+            <label class="answer-label" for="true-answer">Correct Answer</label>
+            <input id = "answer-inp" class ="true-answer-inp" type="text">
         </div>
         <div class="icons">
-        <button class="btn" id="btn1" >
+
                 <i class="fa-sharp fa-solid fa-circle-check fa-2xl" id="icon1" onclick="alertFunction(); add();"></i>
-        </button>
-        <button class="btn" id="btn2">
-        <i class="fa-solid fa-circle-xmark fa-2xl" id="icon2" onclick="deleteFunction()"></i>
-        </button>
+
+
+            <i class="fa-solid fa-circle-xmark fa-2xl" id="icon2" onclick="deleteFunction()"></i>
+
         </div>
 
 
-        
+    </form>
+</div>
+    @Html.ActionLink("", "Index", "Home", null, new { @class="btn btn-info fa fa-home fa-xl"})
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
     <!-- bootstrap 4 js -->
@@ -58,31 +91,30 @@
     <script src="~/js/jquery.slimscroll.min.js"></script>
     <script src="~/js/jquery.slicknav.min.js"></script>
 
-
+  
 
     <script>
         function add() {
-           
+
                     $.ajax({
                         type: 'post',
-                        url: '/Add/AddQuestionClassic',
+                        url: '/Add/AddQuestionMultiple',
                         data: {
                             'qdes': $("#qarea").val(),
                             'category': $("#question-category").val(),
                             'answer': $("#answer-inp").val(),
-                    
+                            'option1': $("#input1").val(),
+                            'option2': $("#input2").val(),
+                            'option3': $("#input3").val(),
+                            'option4': $("#input4").val(),
                         }
                     
                 
-            })
+                    })
+                    }
 
-        }
     </script>
 
 
-
-
-    </div>
-    @Html.ActionLink("", "Index", "Home", null, new { @class="btn btn-info fa fa-home fa-xl"})
 </body>
 </html>
